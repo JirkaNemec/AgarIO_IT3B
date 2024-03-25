@@ -17,7 +17,7 @@ namespace AgarIO_IT3B
   /// </summary>,
   public partial class MainWindow : Window
   {
-
+        Ellipse elipse = new Ellipse();
     public MainWindow()
     {
      
@@ -29,7 +29,8 @@ namespace AgarIO_IT3B
 
         Player player = new Player(Brushes.Black, "Tonda");
             player.Location = new Point(x, y);
-            Ellipse elipse = new Ellipse()
+
+            new Ellipse
             {
                 Fill = player.Color,
                 Width = player.Size,
@@ -39,30 +40,29 @@ namespace AgarIO_IT3B
             Canvas.SetTop(elipse,player.Location.Y);    
             Canvas.SetLeft(elipse,player.Location.X);
     }
-        private void UpdatePlayerPosition(Point position)
-        {
-            Canvas.SetLeft(ellipse, position.X - Player.Size / 2);
-            Canvas.SetTop(ellipse, position.Y - player.Size / 2);
-            player.Location = position;
-        }
 
         private void CanvasGame_MouseMove(object sender, MouseEventArgs e)
         {
-            UpdatePlayerPosition(e.GetPosition(canvasGame));
+            double mouseX = e.GetPosition(canvasGame).X;
+            double mouseY = e.GetPosition(canvasGame).Y;
+
+            Canvas.SetTop(elipse, mouseY - player.Size / 2);
+            Canvas.SetLeft(elipse, mouseX - player.Size / 2);
+            player.Location = new Point(mouseX, mouseY);
         }
 
         private void CanvasGame_MouseLeave(object sender, MouseEventArgs e)
         {
             // Pokud myš opustí canvas, můžete například nastavit pozici mimo viditelnou oblast
             // nebo skrýt elipsu, v závislosti na požadavcích hry.
-            Canvas.SetLeft(ellipse, -player.Size);
             Canvas.SetTop(ellipse, -player.Size);
+            Canvas.SetLeft(ellipse, -player.Size);
         }
     }
-
     private void canvasGame_Loaded(object sender, RoutedEventArgs e)
         {
             See();
         }
+        //nevim co s tim mam delat kod mi nefungoval sorry XDDD
     }
 }
