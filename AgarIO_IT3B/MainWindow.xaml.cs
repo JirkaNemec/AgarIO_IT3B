@@ -13,12 +13,30 @@ namespace AgarIO_IT3B
 {
   /// <summary>
   /// Interaction logic for MainWindow.xaml
-  /// </summary>
+  /// </summary>,
   public partial class MainWindow : Window
   {
+
     public MainWindow()
     {
-      InitializeComponent();
+     
+    }
+    public void See()
+    {
+            double x = canvasGame.ActualWidth / 2;
+            double y = canvasGame.ActualHeight / 2;
+
+        Player player = new Player(Brushes.Black, "Tonda");
+            player.Location = new Point(x, y);
+            Ellipse elipse = new Ellipse()
+            {
+                Fill = player.Color,
+                Width = player.Size,
+                Height = player.Size
+            };
+            canvasGame.Children.Add(elipse);
+            Canvas.SetTop(elipse,player.Location.Y);    
+            Canvas.SetLeft(elipse,player.Location.X);
     }
   }
 }
